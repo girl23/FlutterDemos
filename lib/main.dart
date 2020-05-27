@@ -5,6 +5,11 @@ import 'dropMenu.dart';
 import 'bubblePage.dart';
 import 'paint/paintTest.dart';
 import 'zlpopmenu/testQpMenu.dart';
+import 'package:flutterdemo/buju/Container.dart';
+import 'biaoge/biaoge.dart';
+import 'xml/xmlDemo.dart';
+import 'Stream/stream_demo.dart';
+import 'rxdartDemo/rxdart_demo.dart';
 
 void main() => runApp(MyApp());
 
@@ -92,7 +97,7 @@ Widget autoListView(){
 ///3使用ListView.builder加载数据
 Widget builderListView(){
   // 创建包含所有元素的可改变长度列表
-  List list =new List.from(['url_launcher使用','dropmenu','气泡','绘制基础','气泡菜单',6]);
+  List list =new List.from(['url_launcher使用','dropmenu','气泡','绘制基础','气泡菜单','布局','表格','xml','Stream','xrdart']);
   // 为所有元素统一赋值
 //  List list = new List<int>.filled(3, 0);
   // 用生成器给所有元素赋初始值
@@ -128,6 +133,21 @@ Widget builderListView(){
              break;
            case 4:
              Navigator.of(context).push(MaterialPageRoute(builder: (context) => TestMenusDemo()));
+             break;
+           case 5:
+             Navigator.of(context).push(MaterialPageRoute(builder: (context) => ContainerBj()));
+             break;
+           case 6:
+             Navigator.of(context).push(MaterialPageRoute(builder: (context) => MyTableDemo()));
+             break;
+           case 7:
+             Navigator.of(context).push(MaterialPageRoute(builder: (context) => XMLDemo()));
+             break;
+           case 8:
+             Navigator.of(context).push(MaterialPageRoute(builder: (context) => StreamDemo()));
+             break;
+           case 9:
+             Navigator.of(context).push(MaterialPageRoute(builder: (context) => RxDartDemo()));
              break;
 
            default:
