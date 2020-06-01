@@ -1,6 +1,8 @@
 //绘制基础
 import 'dart:math';
 import 'dart:ui';
+import 'paintCircle.dart';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 class PaintTest extends StatelessWidget {
@@ -12,29 +14,36 @@ class PaintTest extends StatelessWidget {
 
         title: Text('绘制'),
       ),
-      body: Center(
-        child: CustomPaint(
-          size: Size(300,300),
-          painter: MyPainter(),
+      body:Container(
+        color: Colors.yellow,
+        child:  CustomPaint(
+            painter: CirclePainter([Colors.red,Colors.blue,Colors.green],[50,30,20],center: Offset(50,50),radius: 40,startAngle:pi ,filled: true)
         ),
       ),
+
     );
   }
 }
 class MyPainter extends CustomPainter {
   ///[定义画笔]
-  Paint _paint = Paint()
+  Paint _paint1 = Paint()
     ..color = Colors.blueAccent //画笔颜色
-    ..strokeCap = StrokeCap.round//画笔笔触类型
+    ..strokeCap = StrokeCap.butt//画笔笔触类型
     ..isAntiAlias = true //是否启动抗锯齿
     ..style = PaintingStyle.stroke //绘画风格，默认为填充PaintStyle.stroke 不填充,PaintingStyle.fill 填充
-    ..strokeWidth = 5.0; //画笔的宽度
-  Paint _paint2 = Paint()
-    ..color = Colors.red//画笔颜色
-    ..strokeCap = StrokeCap.round//画笔笔触类型
-    ..isAntiAlias = true //是否启动抗锯齿
-    ..style = PaintingStyle.stroke //绘画风格，默认为填充PaintStyle.stroke 不填充,PaintingStyle.fill 填充
-    ..strokeWidth = 5.0; //画笔的宽度
+    ..strokeWidth = 20.0; //画笔的宽度
+//  Paint _paint2 = Paint()
+//    ..color = Colors.red//画笔颜色
+//    ..strokeCap = StrokeCap.butt//画笔笔触类型
+//    ..isAntiAlias = true //是否启动抗锯齿
+//    ..style = PaintingStyle.stroke //绘画风格，默认为填充PaintStyle.stroke 不填充,PaintingStyle.fill 填充
+//    ..strokeWidth = 20.0; //画笔的宽度
+//  Paint _paint3 = Paint()
+//    ..color = Colors.yellow//画笔颜色
+//    ..strokeCap = StrokeCap.butt//画笔笔触类型
+//    ..isAntiAlias = true //是否启动抗锯齿
+//    ..style = PaintingStyle.stroke //绘画风格，默认为填充PaintStyle.stroke 不填充,PaintingStyle.fill 填充
+//    ..strokeWidth = 20.0;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -133,12 +142,25 @@ class MyPainter extends CustomPainter {
 
     //新建了一个path,然后将路径起始点移动到坐标(100,100)的位置
 //    在开始绘图之前，您的笔默认位于原点（即画布的左上角）。在开始绘图之前，您可以使用此功能移动笔。
-    Path path = new Path()..moveTo(100.0, 100.0);
-    path.lineTo(200.0, 200.0);
+//    Path path = new Path()..moveTo(0.0,0.0);
+//    path.lineTo(200.0, 200.0);
+//    canvas.drawPath(path, _paint);
     const PI = 3.1415926;
-    Rect rect2 = Rect.fromCircle(center: Offset(100.0, 200.0), radius: 100.0);
-    canvas.drawArc(rect2,0 , PI/2, false, _paint2);
-    canvas.drawPath(path, _paint);
+    Rect rect2 = Rect.fromCircle(center: Offset(200, 200.0), radius: 100.0);
+    //    根据定义，一周的弧度数为2πr/r=2π，360°角=2π弧度，因此，1弧度约为57.3°，即57°17’44.806’’，
+//    1°为π/180弧度，近似值为0.01745弧度，周角为2π弧度，平角（即180°角）为π弧度，直角为π/2弧度。
+    //rect2矩型区域，起始点，化的幅度，是否连接中心原点
+    //将360平均分层100分*乘以每一份占的弧度，再乘以100份中占了多少份
+    double p1=(360.0/100.0)*PI/180.0*50.0;
+    double p2=(360.0/100.0)*PI/180.0*20.0;
+    double p3=(360.0/100.0)*PI/180.0*30.0;
+    canvas.drawArc(rect2,PI/2 , p1, false, _paint1);
+    _paint1.color=Colors.red;
+    canvas.drawArc(rect2,PI/2+p1, p2, false, _paint1);
+    _paint1.color=Colors.yellow;
+    canvas.drawArc(rect2,PI/2+p1+p2, p3, false, _paint1);
+
+
   }
 
   @override
