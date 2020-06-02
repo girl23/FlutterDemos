@@ -1,7 +1,7 @@
 //绘制基础
 import 'dart:math';
 import 'dart:ui';
-import 'paintCircle.dart';
+import 'paint_circle.dart';
 import 'dart:math';
 
 import 'package:flutter/material.dart';

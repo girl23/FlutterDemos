@@ -20,7 +20,7 @@ class ZLExpansionPanelList extends StatefulWidget {
  final List<ExpandStateBean> expandStateList;//记录index对应的折叠状态
  List<int> _smList;//记录子项index
 
- ZLExpansionPanelList(this.headerList,this.subItemList,this.mList,this.expandStateList,{this.hasDividers=true, this.marginBottom=0, this.icon=const Icon(Icons.expand_more),
+ ZLExpansionPanelList(this.headerList,this.subItemList,this.mList,this.expandStateList,{Key key,this.hasDividers=true, this.marginBottom=0, this.icon=const Icon(Icons.expand_more),
    this.textAlignment=Alignment.centerLeft,this.canTapOnHeader = false,this.headerClickCallback,this.subItemClickCallback}){
 //   _mList=new List();//组成一个int类型数组，用来控制索引
 
@@ -33,10 +33,10 @@ class ZLExpansionPanelList extends StatefulWidget {
 //   }
 
  }
-  _ZLExpansionPanelListState createState() => _ZLExpansionPanelListState();
+  ZLExpansionPanelListState createState() => ZLExpansionPanelListState();
 }
 
-class _ZLExpansionPanelListState extends State<ZLExpansionPanelList> {
+class ZLExpansionPanelListState extends State<ZLExpansionPanelList> {
   //修改展开与闭合的内部方法
   _setCurrentIndex(int index,isExpand){
     setState(() {
@@ -128,15 +128,3 @@ class _ZLExpansionPanelListState extends State<ZLExpansionPanelList> {
     );
   }
 }
-
-////list中item状态自定义类
-//class ExpandStateBean{
-//  var isOpen;   //item是否打开
-//  var index;    //item中的索引
-//  ExpandStateBean(this.index,this.isOpen);
-//}
-
-
-//class HeadStateOperator with ChangeNotifier{
-//
-//}

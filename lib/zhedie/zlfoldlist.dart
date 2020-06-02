@@ -23,11 +23,8 @@ class _SaltedKey<S, V> extends LocalKey {
     return '[$saltString $valueString]';
   }
 }
-
 typedef ExpansionPanelCallback = void Function(int panelIndex, bool isExpanded);
-
 typedef ExpansionPanelHeaderBuilder = Widget Function(BuildContext context, bool isExpanded);
-
 class ExpansionPanel {
   ExpansionPanel({
     @required this.headerBuilder,

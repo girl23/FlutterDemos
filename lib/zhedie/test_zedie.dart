@@ -4,11 +4,14 @@ import 'expandstatebean.dart';
 class ZeDieDemo extends StatefulWidget {
   @override
   _ZeDieDemoState createState() => _ZeDieDemoState();
+
 }
 
 class _ZeDieDemoState extends State<ZeDieDemo> {
   List headerList;
+
   List <int> mList;//组成一个int类型数组，用来控制索引
+
   List <ExpandStateBean> expandStateList;
   //取消全选和加载数据
   loadData(){
