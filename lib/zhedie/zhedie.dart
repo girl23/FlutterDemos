@@ -1,31 +1,38 @@
 import 'package:flutter/material.dart';
 import 'zlfoldlist.dart' as fold;
+import 'expandstatebean.dart';
+
+//头部点击回调
 typedef HeaderClickCallback = void Function(int panelIndex, bool isExpanded);
+//子项点击回调
 typedef SubItemClickCallback = void Function(int parentIndex, int childIndex);
 class ZLExpansionPanelList extends StatefulWidget {
- final bool hasDividers;
- final double marginBottom;
- final Icon icon;
- final Alignment textAlignment;
- final List headerList;
- final HeaderClickCallback headerClickCallback;
- final SubItemClickCallback subItemClickCallback;
- List<int> _mList;
- List<ExpandStateBean> _expandStateList;
- List<int> _smList;
- List _sublist;
- ZLExpansionPanelList(this.headerList,{this.hasDividers=true, this.marginBottom=0, this.icon=const Icon(Icons.expand_more),
-   this.textAlignment=Alignment.centerLeft,this.headerClickCallback,this.subItemClickCallback}){
-   _mList=new List();//组成一个int类型数组，用来控制索引
-   _expandStateList=new List();
-   _sublist=new List.from([['1','2777776gkhdajgaljgalhglajglajglajgljaljglajglajgljajg'],['3','4','5'],['6','7']]);
-   _smList=new List();
-   for(int i=0;i<headerList.length;i++){
-     _mList.add(i);
-     _expandStateList.add(ExpandStateBean(i,false));
-   }
- }
+ final bool hasDividers;//分割线
+ final double marginBottom;//底部间隔
+ final Icon icon;//图片下箭头，复选框不适用
+ final bool canTapOnHeader;//是否可以点击头部
+ final Alignment textAlignment;//
+ final List headerList;//头部数据信息
+ final List subItemList;//子项数据信息
+ final HeaderClickCallback headerClickCallback;//头部点击回调
+ final SubItemClickCallback subItemClickCallback;//子项点击回调
+ final List<int> mList;//记录头部index
+ final List<ExpandStateBean> expandStateList;//记录index对应的折叠状态
+ List<int> _smList;//记录子项index
 
+ ZLExpansionPanelList(this.headerList,this.subItemList,this.mList,this.expandStateList,{this.hasDividers=true, this.marginBottom=0, this.icon=const Icon(Icons.expand_more),
+   this.textAlignment=Alignment.centerLeft,this.canTapOnHeader = false,this.headerClickCallback,this.subItemClickCallback}){
+//   _mList=new List();//组成一个int类型数组，用来控制索引
+
+//   _expandStateList=new List();
+   _smList=new List();
+//
+//   for(int i=0;i<headerList.length;i++){
+//     _mList.add(i);
+//     _expandStateList.add(ExpandStateBean(i,false));//默认全部折叠
+//   }
+
+ }
   _ZLExpansionPanelListState createState() => _ZLExpansionPanelListState();
 }
 
@@ -34,7 +41,7 @@ class _ZLExpansionPanelListState extends State<ZLExpansionPanelList> {
   _setCurrentIndex(int index,isExpand){
     setState(() {
       //遍历可展开状态列表
-     widget._expandStateList.forEach((item){
+     widget.expandStateList.forEach((item){
         if(item.index==index){
           //取反，经典取反方法
           item.isOpen=!isExpand;
@@ -60,8 +67,7 @@ class _ZLExpansionPanelListState extends State<ZLExpansionPanelList> {
 
           },
           //进行map操作，然后用toList再次组成List
-          children:
-          widget._mList.map((index){
+          children: widget.mList.map((index){
             //返回一个组成的ExpansionPanel
             return
               fold.ExpansionPanel(
@@ -78,15 +84,15 @@ class _ZLExpansionPanelListState extends State<ZLExpansionPanelList> {
                 Column(
                   children:
                   <Widget>[
-                    subWidget(widget._sublist[index],index),
+                    subWidget(widget.subItemList[index],index),
                     SizedBox(
                       height: 10,
                     )
                   ],
                 )
               ),
-              isExpanded:widget._expandStateList[index].isOpen,//闭合状态
-              canTapOnHeader: true,
+              isExpanded:widget.expandStateList[index].isOpen,//闭合状态
+              canTapOnHeader: widget.canTapOnHeader,
             );
           }).toList(),
         ),
@@ -123,12 +129,14 @@ class _ZLExpansionPanelListState extends State<ZLExpansionPanelList> {
   }
 }
 
+////list中item状态自定义类
+//class ExpandStateBean{
+//  var isOpen;   //item是否打开
+//  var index;    //item中的索引
+//  ExpandStateBean(this.index,this.isOpen);
+//}
 
-//list中item状态自定义类
-class ExpandStateBean{
-  var isOpen;   //item是否打开
-  var index;    //item中的索引
-  ExpandStateBean(this.index,this.isOpen);
-}
 
-
+//class HeadStateOperator with ChangeNotifier{
+//
+//}

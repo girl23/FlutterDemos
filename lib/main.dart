@@ -1,6 +1,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutterdemo/urllauchertest/zl_url_laucher.dart';
+import 'package:provider/provider.dart';
+import 'package:provider/single_child_widget.dart';
 import 'dropMenu.dart';
 import 'bubblePage.dart';
 import 'paint/paintTest.dart';
@@ -10,7 +12,6 @@ import 'biaoge/biaoge.dart';
 import 'xml/xmlDemo.dart';
 import 'Stream/stream_demo.dart';
 import 'rxdartDemo/rxdart_demo.dart';
-//import 'zhedie/zhedie.dart';
 import 'zhedie/test_zedie.dart';
 
 void main() => runApp(MyApp());
@@ -47,13 +48,14 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      appBar: AppBar(
+        appBar: AppBar(
 
-        title: Text(widget.title),
-      ),
-      body:builderListView(), //autoListView(),//manuallyListView(),
-     // This trailing comma makes auto-formatting nicer for build methods.
-    );
+          title: Text(widget.title),
+        ),
+        body:builderListView(), //autoListView(),//manuallyListView(),
+        // This trailing comma makes auto-formatting nicer for build methods.
+      ) ;
+
   }
 }
 

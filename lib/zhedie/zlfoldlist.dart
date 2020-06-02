@@ -99,16 +99,21 @@ class _ExpansionPanelListState extends State<ExpansionPanelList> {
         );
         //图标
         Widget expandIconContainer = Container(
-//          color: Colors.pink,
-  //        margin: const EdgeInsetsDirectional.only(end: 0.0),
           child: iconBtn.ExpandIcon(
-            icon: widget.icon,
             isExpanded: _isChildExpanded(index),
-            padding: const EdgeInsets.all(10.0),//可以将行撑大
-            onPressed: !child.canTapOnHeader
-                ? (bool isExpanded) => _handlePressed(isExpanded, index)
-                : null,
-          ),
+            valueChanged:(bool isExpanded) => _handlePressed(isExpanded, index),
+//            !child.canTapOnHeader
+//                ? (bool isExpanded) => _handlePressed(isExpanded, index)
+//                : null,
+          )
+//          iconBtn.ExpandIcon(
+//            icon: widget.icon,
+//            isExpanded: _isChildExpanded(index),
+//            padding: const EdgeInsets.all(10.0),//可以将行撑大
+//            onPressed: !child.canTapOnHeader
+//                ? (bool isExpanded) => _handlePressed(isExpanded, index)
+//                : null,
+//          ),
         );
         //头部布局
         Widget header = Row(
