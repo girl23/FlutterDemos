@@ -1,7 +1,8 @@
 ///全局单例
 typedef T CreateInstanceFn<T>();
+
 class BaseSingleton {
-  static final BaseSingleton _singleton =  BaseSingleton._internal();
+  static final BaseSingleton _singleton = BaseSingleton._internal();
 
   final _factories = Map<String, dynamic>();
 

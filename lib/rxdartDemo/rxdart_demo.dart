@@ -2,42 +2,48 @@ import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 import 'dart:async';
 
-
 class RxDartDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:Text('stream'),
+        title: Text('stream'),
       ),
       body: RXDemoHome(),
-    );;
+    );
+    ;
   }
 }
+
 class RXDemoHome extends StatefulWidget {
   @override
   _RXDemoHomeState createState() => _RXDemoHomeState();
 }
 
 class _RXDemoHomeState extends State<RXDemoHome> {
-  PublishSubject<String>_textFieldSubject;
+  PublishSubject<String> _textFieldSubject;
+
   @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
     _textFieldSubject.close();
   }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    _textFieldSubject=PublishSubject<String>();
+    _textFieldSubject = PublishSubject<String>();
     _textFieldSubject
 //        .where((item)=>item.length>3)
 //        .map((item)=>'item:$item')
 
-        .debounce(Duration(milliseconds: 500))//设置间隔时间，如果用户不断输入，输入停止一段时间才会让当前数据通过
-        .listen((data){print(data);});
+        .debounce(
+            Duration(milliseconds: 500)) //设置间隔时间，如果用户不断输入，输入停止一段时间才会让当前数据通过
+        .listen((data) {
+      print(data);
+    });
 
     //observable继承了stream;
 //    Observable<String> _observable=Observable(Stream.fromIterable(['hello','您好']));
@@ -58,9 +64,8 @@ class _RXDemoHomeState extends State<RXDemoHome> {
 //    _subject.add('hello');
 //    _subject.listen((data)=>print('listern2:${data.toUpperCase()}'));
 //    _subject.add('haga');
-
-
   }
+
   @override
   Widget build(BuildContext context) {
     return Theme(
@@ -68,10 +73,10 @@ class _RXDemoHomeState extends State<RXDemoHome> {
         primaryColor: Colors.black,
       ),
       child: TextField(
-        onChanged: (value){
+        onChanged: (value) {
           _textFieldSubject.add('input:$value');
         },
-        onSubmitted: (value){
+        onSubmitted: (value) {
           _textFieldSubject.add('submitted:$value');
         },
         decoration: InputDecoration(
@@ -79,8 +84,6 @@ class _RXDemoHomeState extends State<RXDemoHome> {
           filled: true,
         ),
       ),
-
     );
   }
 }
-

@@ -102,7 +102,7 @@ Widget autoListView(){
 ///3使用ListView.builder加载数据
 Widget builderListView(){
   // 创建包含所有元素的可改变长度列表
-  List list =new List.from(['url_launcher使用','dropmenu','气泡','绘制基础','气泡菜单','布局','表格','xml','Stream','xrdart','折叠列表']);
+  List list =new List.from(['url_launcher使用','dropmenu','气泡','绘制基础','气泡菜单','布局','表格','xml','Stream','xrdart','折叠列表','sqflite']);
   // 为所有元素统一赋值
 //  List list = new List<int>.filled(3, 0);
   // 用生成器给所有元素赋初始值

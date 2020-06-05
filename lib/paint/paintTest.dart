@@ -3,7 +3,7 @@ import 'dart:math';
 import 'dart:ui';
 import 'paint_circle.dart';
 import 'dart:math';
-
+import 'circle_progress.dart';
 import 'package:flutter/material.dart';
 class PaintTest extends StatelessWidget {
   @override
@@ -14,13 +14,7 @@ class PaintTest extends StatelessWidget {
 
         title: Text('绘制'),
       ),
-      body:Container(
-        color: Colors.yellow,
-        child:  CustomPaint(
-            painter: CirclePainter([Colors.red,Colors.blue,Colors.green],[50,30,20],center: Offset(50,50),radius: 40,startAngle:pi ,filled: true)
-        ),
-      ),
-
+      body:CircleProgress([Colors.red,Colors.blue,Colors.green],[50,30,20],center: Offset(50,50),radius: 40,startAngle:pi ,filled: false,strokeWidth: 8),//CircleProgress(),
     );
   }
 }
