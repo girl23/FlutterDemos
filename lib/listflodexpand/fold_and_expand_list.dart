@@ -46,7 +46,7 @@ class ZLExpansionPanelListState extends State<ZLExpansionPanelList> {
     _expandStateList=new List();
     for(int i=0;i<widget.headerWidgets.length;i++){
       _mList.add(i);
-      _expandStateList.add(ExpandStateBean(i,true));//默认全部折叠
+      _expandStateList.add(ExpandStateBean(i,true));
     }
   }
   //修改展开与闭合的内部方法
@@ -113,20 +113,33 @@ class ZLExpansionPanelListState extends State<ZLExpansionPanelList> {
             return
               fold.ExpansionPanel(
                 headerBuilder: (context,isExpanded){
-                  return widget.headerWidgets[index];
+                  return  Container(
+//                    color: Colors.greenAccent,
+                    child:widget.headerWidgets[index] ,
+                  );
+
                 },
                 body: Container(
-                    child:
-                    Column(
-                      children:
-                      <Widget>[
-                        subWidget(widget.subWidgets[index], index),
-                        SizedBox(
-                          height: 10,
-                        )
-                      ],
-                    )
+                  child: Column(
+                    children: <Widget>[
+
+                      Container(
+//                          color: Colors.redAccent,
+                          child:
+                          Column(
+                            children:
+                            <Widget>[
+                              subWidget(widget.subWidgets[index], index),
+//                        SizedBox(
+//                          height: 10,
+//                        )
+                            ],
+                          )
+                      ),
+                    ],
+                  ),
                 ),
+
                 isExpanded:_expandStateList[index].isOpen,//闭合状态
                 canTapOnHeader: widget.canTapOnHeader,
               );
@@ -158,7 +171,17 @@ class ZLExpansionPanelListState extends State<ZLExpansionPanelList> {
                     setState(() {
                     });
                   },
-                  child: subWidget[subIndex],
+                  child: Row(
+                    children: <Widget>[
+                      Container(
+                        margin:EdgeInsets.only(left: 5,right: 20),
+//                        color: Colors.yellow,
+                        child: Icon(Icons.fiber_manual_record,color: Colors.white,size: 8,),
+                        ),
+                      subWidget[subIndex],
+                    ],
+                  )
+
                 )
             ),
           elevation: 0,

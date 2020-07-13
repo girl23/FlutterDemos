@@ -115,7 +115,7 @@ class _ExpansionPanelListState extends State<ExpansionPanelList> {
         //头部布局
         Widget header = Row(
           children: <Widget>[
-            expandIconContainer,
+
             Expanded(//控制充满
               child: AnimatedContainer(
                 duration: widget.animationDuration,
@@ -127,7 +127,7 @@ class _ExpansionPanelListState extends State<ExpansionPanelList> {
                 ),
               ),
             ),
-
+            expandIconContainer,
           ],
         );
         if (child.canTapOnHeader) {

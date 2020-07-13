@@ -14,7 +14,7 @@ class PaintTest extends StatelessWidget {
 
         title: Text('绘制'),
       ),
-      body:CircleProgress([Colors.red,Colors.blue,Colors.green],[50,30,20],center: Offset(50,50),radius: 40,startAngle:pi ,filled: false,strokeWidth: 8),//CircleProgress(),
+      body:CircleProgress([Colors.yellow,Colors.greenAccent,Colors.white],[35,50,15],Size(320,240),filled: false,strokeWidth: 16),//CircleProgress(),
     );
   }
 }

@@ -10,9 +10,11 @@ class ContainerBj extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appTitle = "Offstage控制是否显示组件示例";
-    return new MaterialApp(
-      title: appTitle,
-      home: new MyHomePage(title:appTitle),
+    return new Scaffold(
+      appBar: AppBar(
+        title:Text('stream'),
+      ),
+      body: MyHomePage(),
     );
   }
 }

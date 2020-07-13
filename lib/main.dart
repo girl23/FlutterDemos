@@ -457,4 +457,14 @@ Widget builderListView(){
   );
 }
 
-
+Widget builderListView1(){
+return ListView.builder(
+    itemCount: 3,
+    itemBuilder: (BuildContext context, int index) {
+      return Text(
+      '文本添加颜色',
+      style: TextStyle(fontWeight: FontWeight.bold,color: Color.fromARGB(100, 0, 0, 128)),
+      );
+    }
+  );
+}

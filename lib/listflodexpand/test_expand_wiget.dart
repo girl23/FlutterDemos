@@ -32,7 +32,7 @@ void initState() {
         title:Text('fold/expand'),
       ),
       body:Container(
-          width: 200,
+          width: double.infinity,
           child: Column(
             children: <Widget>[
               Container(

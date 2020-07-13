@@ -88,7 +88,32 @@ class _ExpansionPanelListState extends State<ExpansionPanelList> {
 
     final List<MergeableMaterialItem> items = <MergeableMaterialItem>[];
 
+    //存储进度条的颜色
+    List<Color> progressColor=new List();
+
     for (int index = 0; index < widget.children.length; index += 1) {
+      switch(index){
+        case 0:
+          progressColor.add(Color(0xffFCED74));
+          break;
+        case 1:
+          progressColor.add(Color(0xff4AE5CE));
+          break;
+        case 2:
+          progressColor.add(Color(0xff74FF7E));
+          break;
+        case 3:
+          progressColor.add(Color(0xff74AEFE));
+          break;
+        case 4:
+          progressColor.add(Color(0xffED88EE));
+          break;
+        default:
+          progressColor.add(Color(0xffFCED74));
+
+          break;
+
+      }
       final ExpansionPanel child = widget.children[index];
       final Widget headerWidget = child.headerBuilder(
         context,
@@ -98,28 +123,69 @@ class _ExpansionPanelListState extends State<ExpansionPanelList> {
       Widget expandIconContainer = Container(
           child: iconBtn.ExpandIcon(
             isExpanded: _isChildExpanded(index),
-            valueChanged:(bool isExpanded) => _handlePressed(isExpanded, index)),
+//            valueChanged:(bool isExpanded) => _handlePressed(isExpanded, index)
+          ),
       );
       //头部布局
-      Widget header = Row(
-        children: <Widget>[
-          expandIconContainer,
-          Expanded(//控制充满
-            child: AnimatedContainer(
-              duration: widget.animationDuration,
-              curve: Curves.fastOutSlowIn,
-              //              margin:EdgeInsets.all(10),//整个条目//EdgeInsets.zero, //_isChildExpanded(index) ? kExpandedEdgeInsets : EdgeInsets.zero,
-              child: ConstrainedBox(
-                constraints: const BoxConstraints(minHeight: _kPanelHeaderCollapsedHeight),//控制head文本内容最小高度
-                child: headerWidget,
+      Widget headerWidgetWithIndex(int index){
+        return Column(
+          children: <Widget>[
+            Container(
+//              color: Colors.redAccent,
+              child: Row(
+                children: <Widget>[
+                  //图标
+                  expandIconContainer,
+                  //内容
+                  Expanded(//控制充满
+                    child: AnimatedContainer(
+                      duration: widget.animationDuration,
+                      curve: Curves.fastOutSlowIn,
+                      //              margin:EdgeInsets.all(10),//整个条目//EdgeInsets.zero, //_isChildExpanded(index) ? kExpandedEdgeInsets : EdgeInsets.zero,
+                      child: ConstrainedBox(
+                        constraints: const BoxConstraints(minHeight: _kPanelHeaderCollapsedHeight),//控制head文本内容最小高度
+                        child: headerWidget,
+                      ),
+                    ),
+                  ),
+                  //百分比
+                  Container(
+                    padding: EdgeInsets.only(right: 15),
+                    child:Text(
+                      '50%',
+                      style: TextStyle(color: Colors.white),
+                    ) ,
+                  )
+
+                ],
               ),
             ),
-          ),
+            //进度条
+            Container(
+              padding: EdgeInsets.only(left: 15,right: 15),
+              child:ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: Container(
+                    height: 8,
+                    width: MediaQuery.of(context).size.width,
+                    child:LinearProgressIndicator(
+                      backgroundColor:Color(0xFFF78370), //Colors.grey[200],
+                      valueColor: AlwaysStoppedAnimation(progressColor[index]),//Colors.blue),
+                      value: .5,
+                    )
+                ),
+              ) ,
+            ),
 
-        ],
-      );
+          ],
+        );
+      }
+      //index主要用于确定进度条颜色
+      Widget header=headerWidgetWithIndex(index);
+
       if (child.canTapOnHeader) {
-        header = MergeSemantics(
+         header =
+            MergeSemantics(
           child: InkWell(
             onTap: () => _handlePressed(_isChildExpanded(index), index),
             child: header,
