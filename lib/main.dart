@@ -287,6 +287,7 @@ import 'PDF/use_pdf_screen.dart';
 import 'package:flutterdemo/zlpopmenu/popWindowDemo.dart';
 import 'Animation/animation_demo.dart';
 import 'dart:ui';
+import 'package:flutterdemo/QR/QRTest.dart';
 
 
 void main() => runApp(MyApp());
@@ -376,7 +377,7 @@ Widget autoListView(){
 ///3使用ListView.builder加载数据
 Widget builderListView(){
   // 创建包含所有元素的可改变长度列表
-  List list =['url_launcher使用','dropMenu','气g泡','绘制d基础','气泡菜单','布局','表格','xml','Stream','xrDart','折叠列表','数据库','路径','PDF阅读','表头','animation'];
+  List list =['url_launcher使用','dropMenu','气g泡','绘制d基础','气泡菜单','布局','表格','xml','Stream','xrDart','折叠列表','数据库','路径','PDF阅读','表头','animation','扫码'];
 //  print(list.length);
   // 为所有元素统一赋值kg
 //  List list = new List<int>.filled(3, 0);
@@ -445,6 +446,9 @@ Widget builderListView(){
                   break;
                 case 15:
                   Navigator.of(context).push(MaterialPageRoute(builder: (context) => AnimationDemo()));
+                  break;
+                case 16:
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => QRTest()));
                   break;
                 default:
                   break;
